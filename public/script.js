@@ -1,3 +1,5 @@
+const socket = io("/");
+
 const videoGrid = document.getElementById("video-grid");
 const myVideo = document.createElement("video");
 myVideo.muted = true;
@@ -17,6 +19,17 @@ navigator.mediaDevices
   });
 
 ///------------------------------
+
+socket.emit("join-room", ROOM_ID);
+
+socket.on("user-connected", () => {
+  connecToNewUser();
+});
+
+const connecToNewUser = () => {
+  //peerjs para enviar streams entre dos personas
+  console.log("new user");
+};
 
 const addVideoStream = (video, stream) => {
   video.srcObject = stream;
